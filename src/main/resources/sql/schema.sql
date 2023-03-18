@@ -1,7 +1,0 @@
-CREATE TABLE IF NOT EXISTS guestbook (
-    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY,
-    date TIMESTAMP,
-    message VARCHAR(255),
-    name VARCHAR(255),
-    PRIMARY KEY (id)
-);
