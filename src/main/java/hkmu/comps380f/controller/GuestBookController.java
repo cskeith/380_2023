@@ -55,4 +55,14 @@ public class GuestBookController {
         }
         return "redirect:.."; // Another way to redirect in Spring MVC
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteEntry(@PathVariable("id") long entryId) {
+        GuestBookEntry entry = gbeRepo.getEntryById(entryId);
+        if (entry == null) {
+            return "redirect:/guestbook";
+        }
+        gbeRepo.removeEntryById(entryId);
+        return "redirect:/";
+    }
 }

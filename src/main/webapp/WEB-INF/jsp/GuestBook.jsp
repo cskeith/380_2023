@@ -11,10 +11,12 @@
 <c:if test="${fn:length(entries) > 0}">
     <ul>
         <c:forEach var="entry" items="${entries}">
-            <c:url value="/guestbook/edit/${entry.id}" var="myURL"/>
             <li>
                 #${entry.id} - ${entry.name} (<fmt:formatDate value="${entry.date}" pattern="yyyy-MM-dd"/>):
-                [<a href="${myURL}">Edit</a>] <br/>
+                <c:url value="/guestbook/edit/${entry.id}" var="myURL"/>
+                [<a href="${myURL}">Edit</a>]
+                <c:url value="/guestbook/delete/${entry.id}" var="myURL"/>
+                [<a href="${myURL}">Delete</a>]<br/>
                 <c:out value="${entry.message}" escapeXml="true"/><br/>
             </li>
         </c:forEach>
