@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+    <Properties>
+        <Property name="log-path">/applogs</Property>
+        <Property name="log-pattern">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} [%5p] [%15.15t] %-40.40c{1.} : %m%n%ex
+        </Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console-Appender" target="SYSTEM_OUT">
+            <PatternLayout pattern="${log-pattern}" />
+        </Console>
+        <File name="App-File-Appender" fileName="/applogs/app_log.log">
+            <PatternLayout pattern="${log-pattern}" />
+        </File>
+        <File name="Spring-File-Appender" fileName="/applogs/spring_log.log">
+            <PatternLayout pattern="${log-pattern}" />
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="Spring-File-Appender"/>
+            <AppenderRef ref="Console-Appender"/>
+        </Logger>
+        <Logger name="hkmu.comps380f.controller" level="info" additivity="false">
+            <AppenderRef ref="App-File-Appender"/>
+            <AppenderRef ref="Console-Appender"/>
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="Console-Appender"/>
+        </Root>
+    </Loggers>
+</Configuration>
