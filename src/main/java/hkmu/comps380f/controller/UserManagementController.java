@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,9 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/user")
 public class UserManagementController {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Autowired
     private UserValidator userValidator;
 
@@ -89,8 +93,9 @@ public class UserManagementController {
         if (result.hasErrors()) {
             return "addUser";
         }
+        //...
         umService.createTicketUser(form.getUsername(),
-                form.getPassword(), form.getRoles());
+                passwordEncoder.encode(form.getPassword()), form.getRoles());
         return "redirect:/user/list";
     }
 

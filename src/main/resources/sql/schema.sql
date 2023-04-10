@@ -15,11 +15,9 @@ create table if not exists attachment (
     foreign key (ticket_id) references ticket
 );
 
-DROP TABLE IF EXISTS user_roles;
-DROP TABLE IF EXISTS users;
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL,
     PRIMARY KEY (username)
 );
 CREATE TABLE IF NOT EXISTS user_roles (
